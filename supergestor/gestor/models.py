@@ -191,7 +191,12 @@ class asignacion(models.Model):
     usuario=models.ForeignKey(settings.AUTH_USER_MODEL)
     rol=models.ForeignKey(rol)
     proyecto=models.ForeignKey(proyecto)
+    
+class delegacion(models.Model):
+    delegacion_id=models.AutoField(primary_key=True)
+    usuario=models.ForeignKey(settings.AUTH_USER_MODEL)
     HU=models.ForeignKey(HU)
+    proyecto=models.ForeignKey(proyecto)
     
     
     
