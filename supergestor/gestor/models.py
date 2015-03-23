@@ -106,6 +106,9 @@ class rol(models.Model):
     tipo = models.CharField(max_length = 3, choices = ROL_CHOICES)
     
     
+    
+
+    
 class proyecto(models.Model):
     ESTADO_CHOICES = (
         ('PEN', 'Pendiente'),
@@ -122,35 +125,6 @@ class proyecto(models.Model):
     fecha_fin = models.DateTimeField()
     estado = models.CharField(max_length = 3, choices = ESTADO_CHOICES)
     
-class Sprint(models.Model):
-    
-    ESTADO_CHOICES = (
-        ('CAN', 'Cancelado'),
-        ('ACT', 'Activo'),
-        ('CON', 'Consulta'),
-    )
-     
-    Sprint_id = models.AutoField(primary_key=True)
-    descripcion = models.CharField(max_length = 200)
-    #HU se referencia desde el modelo HU
-    fecha_inicio = models.DateTimeField()
-    duracion = models.FloatField()
-    estado = models.CharField(max_length = 3, choices = ESTADO_CHOICES)
-    
-
-    
-    
-class Flujo(models.Model):
-    
-    ESTADO_CHOICES = (
-        ('CAN', 'Cancelado'),
-        ('ACT', 'Activo'),
-    )
-     
-    Flujo_id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length = 200)
-    estado = models.CharField(max_length = 3, choices = ESTADO_CHOICES)
-
 
 
 
@@ -171,9 +145,40 @@ class HU(models.Model):
     duracion = models.FloatField()
     acumulador_horas = models.FloatField()
     estado = models.CharField(max_length = 3, choices = ESTADO_CHOICES)
-    kanban=models.ForeignKey(Flujo)
-    sprint=models.ForeignKey(Sprint)
+    
+
+class Sprint(models.Model):
+    
+    ESTADO_CHOICES = (
+        ('CAN', 'Cancelado'),
+        ('ACT', 'Activo'),
+        ('CON', 'Consulta'),
+    )
+     
+    Sprint_id = models.AutoField(primary_key=True)
+    descripcion = models.CharField(max_length = 200)
+    #HU se referencia desde el modelo HU
+    fecha_inicio = models.DateTimeField()
+    duracion = models.FloatField()
+    estado = models.CharField(max_length = 3, choices = ESTADO_CHOICES)
     proyecto=models.ForeignKey(proyecto)
+    
+
+    
+    
+class Flujo(models.Model):
+    
+    ESTADO_CHOICES = (
+        ('CAN', 'Cancelado'),
+        ('ACT', 'Activo'),
+    )
+     
+    Flujo_id = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length = 200)
+    estado = models.CharField(max_length = 3, choices = ESTADO_CHOICES)
+    proyecto=models.ForeignKey(proyecto)
+    
+
     
     
 class Actividad(models.Model):
@@ -197,6 +202,10 @@ class delegacion(models.Model):
     usuario=models.ForeignKey(settings.AUTH_USER_MODEL)
     HU=models.ForeignKey(HU)
     proyecto=models.ForeignKey(proyecto)
+    
+    
+    
+
     
     
     
