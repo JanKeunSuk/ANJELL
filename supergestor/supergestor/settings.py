@@ -55,7 +55,7 @@ WSGI_APPLICATION = 'supergestor.wsgi.application'
 
 AUTH_USER_MODEL='gestor.MyUser'
 
-
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
